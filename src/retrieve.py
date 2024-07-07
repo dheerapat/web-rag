@@ -23,7 +23,7 @@ def make_retrieve_pipeline(document_store):
     pipeline.add_component("prompt_builder", PromptBuilder(template=query_template))
     pipeline.add_component("text_embedder", SentenceTransformersTextEmbedder())
     pipeline.add_component("retriever", InMemoryEmbeddingRetriever(document_store=document_store))
-    pipeline.add_component("llm", OpenAIGenerator(api_key= os.getenv("OPENAI_API_KEY")))
+    pipeline.add_component("llm", OpenAIGenerator(model="gpt-4"))
     pipeline.connect("text_embedder.embedding", "retriever.query_embedding")
     pipeline.connect("retriever", "prompt_builder")
     pipeline.connect("prompt_builder", "llm")

@@ -21,7 +21,7 @@ Rewritten Question for Web Search:
 def make_preprocess_pipeline():
     preprocess_pipeline = Pipeline()
     preprocess_pipeline.add_component("prompt_builder", PromptBuilder(template=search_template))
-    preprocess_pipeline.add_component("llm", OpenAIGenerator(api_key=os.getenv("OPENAI_API_KEY")))
+    preprocess_pipeline.add_component("llm", OpenAIGenerator(model="gpt-4"))
     preprocess_pipeline.connect("prompt_builder", "llm")
 
     return preprocess_pipeline
